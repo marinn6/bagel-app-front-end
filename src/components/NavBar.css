@@ -1,0 +1,70 @@
+.NavBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5%;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  z-index: 1000;
+  top: 0;
+}
+
+.logo-image {
+  height: auto;
+  max-width: 250px;
+  position: relative;
+  top: -10px;
+  left: -50px;
+}
+
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin: 0 15px;
+  position: relative;
+}
+
+.add-bagel-button {
+  background-color: #a63e47;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-bagel-button a {
+  color: white;
+  text-decoration: none;
+}
+
+.add-bagel-button:hover {
+  background-color: #e07b00;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .logo-image {
+    max-width: 120px;
+    top: 0;
+    left: -10px;
+  }
+}

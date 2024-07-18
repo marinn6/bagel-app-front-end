@@ -1,0 +1,27 @@
+.BagelNewFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* Frosted glass effect */
+}
+
+.BagelNewFormBox {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px; /* Set a max width for the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  margin-bottom: 16px;
+}

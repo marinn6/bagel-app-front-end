@@ -1,4 +1,4 @@
-import SongDetails from "../components/SongDetails";
+import BagelDetails from "../components/BagelDetails";
 
 function Show() {
   return (
