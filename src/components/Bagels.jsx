@@ -1,47 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import Bagel from "./Bagel";
-// import "./Bagels.css";
-
-// const API = import.meta.env.VITE_API_URL;
-
-// function Bagels() {
-//   const [bagels, setBagels] = useState([]);
-
-//   useEffect(() => {
-//     fetch(`${API}/bagels`) //
-//       .then((res) => res.json())
-//       .then((res) => {
-//         console.log(res);
-//         setBagels(res);
-//       })
-//       .catch((err) => console.log(err));
-//   }, []);
-
-//   return (
-//     <div className="BagelsContainer">
-//       <div className="BagelsTable">
-//         <section>
-//           <table>
-//             <thead>
-//               <tr>
-//                 <th>Favorite</th>
-//                 <th>Bagel Name</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {bagels.map((bagel) => {
-//                 return <Bagel key={bagel.id} bagel={bagel} id={bagel.id} />;
-//               })}
-//             </tbody>
-//           </table>
-//         </section>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Bagels;
-
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -54,8 +10,10 @@ import {
   TableSortLabel,
   createTheme,
   ThemeProvider,
+  TablePagination,
 } from "@mui/material";
 import { red, orange } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 import "./Bagels.css";
 
 const API = import.meta.env.VITE_API_URL;
@@ -70,12 +28,16 @@ const theme = createTheme({
     },
     background: {
       default: "#fbe9e7",
-      frosted: "rgba(232, 103, 84, 0.8)",
+      frosted: "rgba(255, 255, 255, 0.5)",
     },
   },
   typography: {
     fontFamily: "Arial, sans-serif",
     fontWeightBold: 600,
+    allVariants: {
+      color: "rgba(0, 0, 0, 0.87)",
+      fontWeight: "bold",
+    },
   },
 });
 
@@ -109,6 +71,9 @@ function Bagels() {
   const [bagels, setBagels] = useState([]);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${API}/bagels`)
@@ -126,197 +91,168 @@ function Bagels() {
     setOrderBy(property);
   };
 
+  const handleRowClick = (id) => {
+    navigate(`/bagels/${id}`);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <TableContainer
-        component={Paper}
-        sx={{
-          backgroundColor: theme.palette.background.frosted,
-          backdropFilter: "blur(1px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderRadius: 8,
-          boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
-        }}
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "name" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "name"}
-                  direction={orderBy === "name" ? order : "asc"}
-                  onClick={() => handleRequestSort("name")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
+      <div className="bagels-container" style={{ padding: "0 50px" }}>
+        <TableContainer
+          component={Paper}
+          className="MuiTableContainer-root"
+          sx={{
+            backgroundColor: theme.palette.background.frosted,
+            boxShadow: "none",
+            borderRadius: 2,
+          }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  align="center"
+                  sortDirection={orderBy === "name" ? order : false}
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  }}
                 >
-                  Bagel Name
-                </TableSortLabel>
-              </TableCell>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "description" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "description"}
-                  direction={orderBy === "description" ? order : "asc"}
-                  onClick={() => handleRequestSort("description")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
-                >
-                  Description
-                </TableSortLabel>
-              </TableCell>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "type" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "type"}
-                  direction={orderBy === "type" ? order : "asc"}
-                  onClick={() => handleRequestSort("type")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
-                >
-                  Type
-                </TableSortLabel>
-              </TableCell>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "price" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "price"}
-                  direction={orderBy === "price" ? order : "asc"}
-                  onClick={() => handleRequestSort("price")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
-                >
-                  Price
-                </TableSortLabel>
-              </TableCell>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "is_glutenFree" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "is_glutenFree"}
-                  direction={orderBy === "is_glutenFree" ? order : "asc"}
-                  onClick={() => handleRequestSort("is_glutenFree")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
-                >
-                  Gluten Free
-                </TableSortLabel>
-              </TableCell>
-              <TableCell
-                align="center"
-                sortDirection={orderBy === "is_available" ? order : false}
-              >
-                <TableSortLabel
-                  active={orderBy === "is_available"}
-                  direction={orderBy === "is_available" ? order : "asc"}
-                  onClick={() => handleRequestSort("is_available")}
-                  IconComponent={({ className, direction }) => (
-                    <span
-                      className={className}
-                      style={{
-                        color: theme.palette.primary.main,
-                        transform:
-                          direction === "desc"
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                      }}
-                    >
-                      ▲
-                    </span>
-                  )}
-                >
-                  Available
-                </TableSortLabel>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stableSort(bagels, getComparator(order, orderBy)).map((bagel) => (
-              <TableRow key={bagel.id}>
-                <TableCell align="center">{bagel.name}</TableCell>
-                <TableCell align="center">{bagel.description}</TableCell>
-                <TableCell align="center">{bagel.type}</TableCell>
-                <TableCell align="center">${bagel.price.toFixed(2)}</TableCell>
-                <TableCell align="center">
-                  {bagel.is_glutenFree ? "Yes" : "No"}
+                  <TableSortLabel
+                    active={orderBy === "name"}
+                    direction={orderBy === "name" ? order : "asc"}
+                    onClick={() => handleRequestSort("name")}
+                    sx={{
+                      color: "rgba(0, 0, 0, 0.87)",
+                    }}
+                  >
+                    Bagel Name
+                  </TableSortLabel>
                 </TableCell>
-                <TableCell align="center">
-                  {bagel.is_available ? "Yes" : "No"}
+                <TableCell
+                  align="center"
+                  sortDirection={orderBy === "description" ? order : false}
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  }}
+                >
+                  <TableSortLabel
+                    active={orderBy === "description"}
+                    direction={orderBy === "description" ? order : "asc"}
+                    onClick={() => handleRequestSort("description")}
+                    sx={{
+                      color: "rgba(0, 0, 0, 0.87)",
+                    }}
+                  >
+                    Description
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sortDirection={orderBy === "type" ? order : false}
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  }}
+                >
+                  <TableSortLabel
+                    active={orderBy === "type"}
+                    direction={orderBy === "type" ? order : "asc"}
+                    onClick={() => handleRequestSort("type")}
+                    sx={{
+                      color: "rgba(0, 0, 0, 0.87)",
+                    }}
+                  >
+                    Type
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sortDirection={orderBy === "price" ? order : false}
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  }}
+                >
+                  <TableSortLabel
+                    active={orderBy === "price"}
+                    direction={orderBy === "price" ? order : "asc"}
+                    onClick={() => handleRequestSort("price")}
+                    sx={{
+                      color: "rgba(0, 0, 0, 0.87)",
+                    }}
+                  >
+                    Price
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sortDirection={orderBy === "is_glutenFree" ? order : false}
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  }}
+                >
+                  <TableSortLabel
+                    active={orderBy === "is_glutenFree"}
+                    direction={orderBy === "is_glutenFree" ? order : "asc"}
+                    onClick={() => handleRequestSort("is_glutenFree")}
+                    sx={{
+                      color: "rgba(0, 0, 0, 0.87)",
+                    }}
+                  >
+                    Gluten Free
+                  </TableSortLabel>
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {stableSort(bagels, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
+                  <TableRow
+                    key={row.id}
+                    hover
+                    onClick={() => handleRowClick(row.id)}
+                    sx={{ cursor: "pointer" }}
+                  >
+                    <TableCell align="left">{row.name}</TableCell>
+                    <TableCell align="left">{row.description}</TableCell>
+                    <TableCell align="center">{row.type}</TableCell>
+                    <TableCell align="center">${row.price}</TableCell>
+                    <TableCell align="center">
+                      {row.is_glutenFree ? "Yes" : "No"}
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[10, 20, 100]}
+            component="div"
+            count={bagels.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </div>
     </ThemeProvider>
   );
 }

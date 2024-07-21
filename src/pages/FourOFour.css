@@ -1,0 +1,49 @@
+/* Root Box Styles */
+.fourOFour-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url("../assets/courtney-cook-0Sya5QO-Gng-unsplash.jpg") no-repeat
+    center center fixed;
+  background-size: cover;
+  text-align: center;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* Content Box Styles */
+.fourOFour-content {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  width: 100%;
+  max-width: 600px;
+  z-index: 1;
+}
+
+/* Typography Styles */
+.fourOFour-title {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #e53935;
+  margin-bottom: 16px;
+}
+
+.fourOFour-subtitle {
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.fourOFour-message {
+  color: #555;
+  margin-bottom: 24px;
+}
+
+/* Button Styles */
+.fourOFour-button {
+  border-radius: 4px;
+  padding: 10px 20px;
+}

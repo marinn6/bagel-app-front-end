@@ -1,27 +1,70 @@
-.BagelNewFormContainer {
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bagel-new-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: rgba(0, 0, 0, 0.3); /* Frosted glass effect */
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../assets/fernanda-martinez-7G5X6kg49Hs-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
 }
 
-.BagelNewFormBox {
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
+.bagel-new-form-box {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
   border-radius: 8px;
-  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 24px;
   width: 100%;
-  max-width: 500px; /* Set a max width for the form */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-form {
+  max-width: 500px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-input,
-textarea {
+.bagel-form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.MuiTextField-root {
   margin-bottom: 16px;
+  width: 100%;
+}
+
+.MuiFormControlLabel-root {
+  margin-bottom: 16px;
+}
+
+.MuiButton-root {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.MuiPaper-elevation6 {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

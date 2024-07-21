@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Box,
+  Paper,
+  Typography,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import "./BagelEditForm.css";
 
 const API = import.meta.env.VITE_API_URL;
 
 function BagelEditForm() {
-  let { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [bagel, setBagel] = useState({
@@ -13,9 +26,8 @@ function BagelEditForm() {
     description: "",
     type: "",
     price: "",
-    is_glutenFree: false,
+    is_gluten_free: false,
     is_available: false,
-    is_favorite: false,
   });
 
   const handleTextChange = (event) => {
@@ -27,7 +39,10 @@ function BagelEditForm() {
     setBagel({ ...bagel, [id]: checked });
   };
 
-  // Update a bagel. Redirect to show view
+  const handleTypeChange = (event) => {
+    setBagel({ ...bagel, type: event.target.value });
+  };
+
   const updateBagel = () => {
     fetch(`${API}/bagels/${id}`, {
       method: "PUT",
@@ -37,24 +52,21 @@ function BagelEditForm() {
       },
     })
       .then((res) => res.json())
-      .then((res) => navigate(`/bagels/${id}`))
+      .then(() => navigate(`/bagels/${id}`))
       .catch((err) => console.log(err));
   };
 
-  // On page load, fill in the form with the bagel data.
   useEffect(() => {
     fetch(`${API}/bagels/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        // Ensure all fields are initialized with default values
         setBagel({
           name: res.name || "",
           description: res.description || "",
           type: res.type || "",
           price: res.price || "",
-          is_glutenFree: res.is_glutenFree || false,
+          is_gluten_free: res.is_gluten_free || false,
           is_available: res.is_available || false,
-          is_favorite: res.is_favorite || false,
         });
       })
       .catch((err) => console.log(err));
@@ -66,81 +78,119 @@ function BagelEditForm() {
   };
 
   return (
-    <div className="BagelEditFormContainer">
-      <div className="BagelEditFormBox">
+    <Box className="BagelEditFormContainer">
+      <Paper
+        elevation={3}
+        style={{
+          padding: "16px",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(10px)",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          width: "100%",
+          maxWidth: "600px",
+          marginTop: "0px",
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Edit this Bagel
+        </Typography>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input
+          <TextField
             id="name"
+            label="Name"
             value={bagel.name}
-            type="text"
             onChange={handleTextChange}
-            placeholder="Name of Bagel"
+            fullWidth
+            margin="normal"
             required
           />
-
-          <label htmlFor="description">Description:</label>
-          <input
+          <TextField
             id="description"
+            label="Description"
             value={bagel.description}
-            type="text"
             onChange={handleTextChange}
-            placeholder="Description"
+            fullWidth
+            margin="normal"
           />
-
-          <label htmlFor="type">Type:</label>
-          <input
-            id="type"
-            value={bagel.type}
-            type="text"
-            onChange={handleTextChange}
-            placeholder="Type"
-            required
-          />
-
-          <label htmlFor="price">Price:</label>
-          <input
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel id="type-label">Type</InputLabel>
+            <Select
+              id="type"
+              value={bagel.type}
+              onChange={handleTypeChange}
+              labelId="type-label"
+              label="Type"
+            >
+              <MenuItem value="sweet">Sweet</MenuItem>
+              <MenuItem value="savory">Savory</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
             id="price"
+            label="Price"
             value={bagel.price}
-            type="text"
             onChange={handleTextChange}
-            placeholder="Price"
+            type="number"
+            fullWidth
+            margin="normal"
             required
+            InputProps={{ style: { width: "100px" } }}
           />
-
-          <label htmlFor="is_glutenFree">Gluten-Free:</label>
-          <input
-            id="is_glutenFree"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-            checked={bagel.is_glutenFree}
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="is_gluten_free"
+                checked={bagel.is_gluten_free}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="Gluten-Free"
           />
-
-          <label htmlFor="is_available">Available:</label>
-          <input
-            id="is_available"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-            checked={bagel.is_available}
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="is_available"
+                checked={bagel.is_available}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="Available"
           />
-
-          <label htmlFor="is_favorite">Favorite:</label>
-          <input
-            id="is_favorite"
-            type="checkbox"
-            onChange={handleCheckboxChange}
-            checked={bagel.is_favorite}
-          />
-          <br />
-          <br />
-          <button type="submit">Submit</button>
+          <Box mt={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{
+                width: "100px",
+                padding: "8px 16px",
+                borderRadius: "4px",
+              }}
+            >
+              Submit
+            </Button>
+            <Link to={`/bagels/${id}`} style={{ textDecoration: "none" }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                style={{
+                  marginLeft: "8px",
+                  minWidth: "120px",
+                  maxWidth: "200px",
+                  padding: "8px 16px",
+                  borderRadius: "4px",
+                  color: "black",
+                  fontWeight: "bold",
+                  borderColor: "black",
+                }}
+              >
+                Back to Bagel
+              </Button>
+            </Link>
+          </Box>
         </form>
-        <br />
-        <Link to={`/bagels/${id}`}>
-          <button>Nevermind!</button>
-        </Link>
-      </div>
-    </div>
+      </Paper>
+    </Box>
   );
 }
 

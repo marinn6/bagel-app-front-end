@@ -1,8 +1,9 @@
+import Bagels from "../components/Bagels";
+
 function Home() {
   return (
     <div className="Home">
-      <h2>Hello</h2>
-      <h3>This is the Bagels App!</h3>
+      <Bagels />
     </div>
   );
 }

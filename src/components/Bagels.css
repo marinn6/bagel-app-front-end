@@ -1,4 +1,31 @@
+html,
 body {
-  background-image: url(../assets/vicky-ng-lIQRPsA43tw-unsplash.jpg);
-  margin-top: 280px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bagels-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 20px 20px 20px;
+  overflow-y: auto;
+  background-image: url("../assets/breakfast.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.MuiTableContainer-root {
+  margin-top: 350px;
+  left: 50px;
+  right: 50px;
+  width: calc(100% - 50px);
+  box-sizing: border-box;
 }

@@ -5,13 +5,12 @@ import {
   TextField,
   Checkbox,
   FormControlLabel,
-  Typography,
   Box,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
+  Typography,
+  Paper,
 } from "@mui/material";
+import { motion } from "framer-motion";
+import bagelImage from "../assets/noun-bagel-2505765.png";
 import "./BagelNewForm.css";
 
 const API = import.meta.env.VITE_API_URL;
@@ -20,14 +19,10 @@ function BagelNewForm() {
   const navigate = useNavigate();
   const [bagel, setBagel] = useState({
     name: "",
-    type: "",
-    price: "",
     description: "",
-    is_glutenFree: false,
-    is_available: true,
+    is_gluten_free: false,
   });
 
-  // Add a bagel. Redirect to the index view.
   const addBagel = () => {
     fetch(`${API}/bagels`, {
       method: "POST",
@@ -36,33 +31,22 @@ function BagelNewForm() {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then(() => {
-        navigate("/bagels");
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
       })
-      .catch((err) => console.log(err));
+      .then(() => navigate("/bagels"))
+      .catch((err) => console.error("Error adding bagel:", err));
   };
 
-  // Handle changes for text, number, and dropdown inputs
   const handleTextChange = (event) => {
-    const { id, value, type, checked } = event.target;
-    setBagel((prevBagel) => ({
-      ...prevBagel,
-      [id]:
-        type === "checkbox"
-          ? checked
-          : type === "number"
-          ? parseFloat(value)
-          : value,
-    }));
+    setBagel({ ...bagel, [event.target.id]: event.target.value });
   };
 
-  // Handle dropdown changes
-  const handleSelectChange = (event) => {
-    setBagel((prevBagel) => ({
-      ...prevBagel,
-      [event.target.name]: event.target.value,
-    }));
+  const handleCheckboxChange = (event) => {
+    setBagel({ ...bagel, [event.target.id]: event.target.checked });
   };
 
   const handleSubmit = (event) => {
@@ -70,102 +54,140 @@ function BagelNewForm() {
     addBagel();
   };
 
+  // Animation variants for complex animation
+  const bagelVariants = {
+    hidden: { opacity: 0, scale: 0.5, rotate: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 360,
+      transition: {
+        duration: 2,
+        ease: "easeInOut",
+        times: [0, 0.5, 1],
+        scale: { type: "spring", stiffness: 100 },
+      },
+    },
+  };
+
   return (
-    <Box className="BagelNewFormContainer">
-      <Box className="BagelNewFormBox">
-        <Typography variant="h4" gutterBottom>
-          Add a New Bagel
+    <motion.div
+      className="bagel-new-form-container"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+    >
+      <Paper
+        elevation={6}
+        sx={{
+          padding: 4,
+          width: "100%",
+          maxWidth: "500px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: 4,
+          borderRadius: 2,
+          boxShadow: 6,
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          backdropFilter: "blur(2px)",
+        }}
+      >
+        {/* Add the image with a complex animation effect */}
+        <motion.img
+          src={bagelImage}
+          alt="Bagel"
+          style={{ width: "100px", marginBottom: "20px" }}
+          variants={bagelVariants}
+          initial="hidden"
+          animate="visible"
+        />
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ mb: 3, fontWeight: "bold" }}
+        >
+          Suggest a New Bagel!
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <TextField
             id="name"
-            label="Name"
+            label="Bagel Name"
             value={bagel.name}
             type="text"
             onChange={handleTextChange}
-            placeholder="Name of Bagel"
-            fullWidth
-            margin="normal"
+            placeholder="Bagel Name"
             required
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 3 }}
           />
-
           <TextField
             id="description"
-            label="Description"
+            label="Bagel Description"
             value={bagel.description}
             onChange={handleTextChange}
-            placeholder="Give a short description of the bagel."
-            fullWidth
-            margin="normal"
+            placeholder="Description of the bagel"
             multiline
-            rows={4}
+            rows={2}
             required
-          />
-
-          <FormControl fullWidth margin="normal" required>
-            <InputLabel id="type-label">Type</InputLabel>
-            <Select
-              labelId="type-label"
-              id="type"
-              name="type"
-              value={bagel.type}
-              onChange={handleSelectChange}
-              label="Type"
-            >
-              <MenuItem value="Sweet">Sweet</MenuItem>
-              <MenuItem value="Savory">Savory</MenuItem>
-            </Select>
-          </FormControl>
-
-          <TextField
-            id="price"
-            label="Price"
-            value={bagel.price}
-            type="number"
-            onChange={handleTextChange}
-            placeholder="Price"
             fullWidth
-            margin="normal"
-            required
+            variant="outlined"
+            sx={{ mb: 3 }}
           />
-
           <FormControlLabel
             control={
               <Checkbox
-                id="is_glutenFree"
-                onChange={handleTextChange}
-                checked={bagel.is_glutenFree}
+                id="is_gluten_free"
+                onChange={handleCheckboxChange}
+                checked={bagel.is_gluten_free}
+                color="primary"
               />
             }
             label="Gluten Free"
+            sx={{ mb: 3 }}
           />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                id="is_available"
-                onChange={handleTextChange}
-                checked={bagel.is_available}
-              />
-            }
-            label="Available"
-          />
-
-          <Box display="flex" justifyContent="space-between" marginTop={2}>
-            <Button type="submit" variant="contained" color="primary">
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              gap: 2,
+              mt: 3,
+              width: "100%",
+            }}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ flex: 1 }}
+            >
               Submit
             </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => navigate("/bagels")}
+            <Link
+              to="/bagels"
+              style={{ textDecoration: "none", width: "100%" }}
             >
-              Back to Bagels
-            </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  flex: 1,
+                  borderColor: "black",
+                  color: "black",
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "transparent",
+                  },
+                }}
+              >
+                Back to Bagels
+              </Button>
+            </Link>
           </Box>
         </form>
-      </Box>
-    </Box>
+      </Paper>
+    </motion.div>
   );
 }
 

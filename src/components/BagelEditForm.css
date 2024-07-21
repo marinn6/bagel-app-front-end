@@ -1,0 +1,86 @@
+/* Ensure full height and width for the HTML and body */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Style the container to center the form and apply a background image */
+.BagelEditFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 125vh; /* Adjusted for full viewport height */
+  width: 100vw;
+  background-image: url("../assets/christine-siracusa-bypcCMcIoVE-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 0;
+  margin: 0;
+}
+
+/* Form styling to align elements correctly */
+.BagelEditFormBox {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Form styling to align elements correctly */
+.BagelEditFormBox form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Margin styling for form fields */
+.BagelEditFormBox .MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+/* Margin styling for checkboxes */
+.BagelEditFormBox .MuiFormControlLabel-root {
+  margin-bottom: 16px;
+}
+
+/* Button styling */
+.BagelEditFormBox .MuiButton-root {
+  margin-top: 16px;
+  padding: 8px 16px; /* Corrected padding values */
+  font-size: 14px;
+}
+
+/* Ensure proper styling for primary and secondary buttons */
+.BagelEditFormBox .MuiButton-contained {
+  width: auto; /* Allow the width to adjust based on content */
+}
+
+.BagelEditFormBox .MuiButton-outlined {
+  width: auto; /* Allow the width to adjust based on content */
+}
+
+/* Ensure that the link buttons are styled correctly */
+.BagelEditFormBox .MuiButton-root + .MuiButton-root {
+  margin-left: 8px;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 600px) {
+  .BagelEditFormBox {
+    padding: 16px;
+  }
+
+  .BagelEditFormBox .MuiButton-root {
+    font-size: 12px;
+  }
+}
