@@ -14,7 +14,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 125vh; /* Adjusted for full viewport height */
+  height: 125vh;
   width: 100vw;
   background-image: url("../assets/christine-siracusa-bypcCMcIoVE-unsplash.jpg");
   background-size: cover;
@@ -37,6 +37,12 @@ body {
   overflow: hidden;
 }
 
+/* Ensure no text transformation is affecting dropdown */
+.BagelEditFormContainer .MuiMenuItem-root {
+  text-transform: none;
+  font-variant: normal;
+}
+
 /* Form styling to align elements correctly */
 .BagelEditFormBox form {
   display: flex;
@@ -56,13 +62,13 @@ body {
 /* Button styling */
 .BagelEditFormBox .MuiButton-root {
   margin-top: 16px;
-  padding: 8px 16px; /* Corrected padding values */
+  padding: 8px 16px;
   font-size: 14px;
 }
 
 /* Ensure proper styling for primary and secondary buttons */
 .BagelEditFormBox .MuiButton-contained {
-  width: auto; /* Allow the width to adjust based on content */
+  width: auto;
 }
 
 .BagelEditFormBox .MuiButton-outlined {

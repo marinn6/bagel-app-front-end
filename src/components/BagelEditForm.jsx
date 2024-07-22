@@ -121,8 +121,8 @@ function BagelEditForm() {
               labelId="type-label"
               label="Type"
             >
-              <MenuItem value="sweet">Sweet</MenuItem>
-              <MenuItem value="savory">Savory</MenuItem>
+              <MenuItem value="Sweet">Sweet</MenuItem>
+              <MenuItem value="Savory">Savory</MenuItem>
             </Select>
           </FormControl>
           <TextField
