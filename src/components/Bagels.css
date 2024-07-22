@@ -5,11 +5,11 @@ body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .bagels-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -28,4 +28,5 @@ body {
   right: 50px;
   width: calc(100% - 50px);
   box-sizing: border-box;
+  scroll-margin-top: 250px;
 }

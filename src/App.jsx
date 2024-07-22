@@ -18,20 +18,25 @@ import "./App.css";
 
 // COMPONENTS
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer"; // Import Footer component
+
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Navigate to="/bagels" replace />} />
-          <Route path="/bagels" element={<Index />} />
-          <Route path="/bagels/new" element={<New />} />
-          <Route path="/bagels/:id" element={<Show />} />
-          <Route path="/bagels/:id/edit" element={<Edit />} />
-          <Route path="/bagels/about" element={<About />} />
-          <Route path="*" element={<FourOFour />} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/bagels" replace />} />
+            <Route path="/bagels" element={<Index />} />
+            <Route path="/bagels/new" element={<New />} />
+            <Route path="/bagels/:id" element={<Show />} />
+            <Route path="/bagels/:id/edit" element={<Edit />} />
+            <Route path="/bagels/about" element={<About />} />
+            <Route path="*" element={<FourOFour />} />
+          </Routes>
+        </div>
+        <Footer />
       </Router>
     </div>
   );

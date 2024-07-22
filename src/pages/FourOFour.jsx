@@ -13,7 +13,7 @@ export default function FourOFour() {
           404
         </Typography>
         <Typography className="fourOFour-subtitle" variant="h5">
-          Are you looking for donuts? we're a BAGEL Lab!
+          Are you looking for donuts? We're a BAGEL Lab!
         </Typography>
 
         <Button

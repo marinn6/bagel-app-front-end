@@ -90,7 +90,7 @@ function BagelNewForm() {
           borderRadius: 2,
           boxShadow: 6,
           backgroundColor: "rgba(255, 255, 255, 0.3)",
-          backdropFilter: "blur(2px)",
+          backdropFilter: "blur(1px)",
         }}
       >
         {/* Add the image with a complex animation effect */}

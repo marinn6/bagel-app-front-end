@@ -1,0 +1,25 @@
+.footer {
+  background-color: transparent;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+  position: relative;
+}
+
+.social-icons a {
+  color: #000;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #e1306c;
+}

@@ -84,7 +84,7 @@ function BagelEditForm() {
         style={{
           padding: "16px",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
+          backdropFilter: "blur(3px)",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
           width: "100%",
           maxWidth: "600px",

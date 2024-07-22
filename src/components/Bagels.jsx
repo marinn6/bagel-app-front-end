@@ -258,3 +258,153 @@ function Bagels() {
 }
 
 export default Bagels;
+
+// import React, { useState, useEffect } from "react";
+// import {
+//   Card,
+//   CardContent,
+//   CardMedia,
+//   Typography,
+//   Grid,
+//   Paper,
+//   createTheme,
+//   ThemeProvider,
+//   Pagination,
+// } from "@mui/material";
+// import { red, orange } from "@mui/material/colors";
+// import { useNavigate } from "react-router-dom";
+// import "./Bagels.css";
+
+// const API = import.meta.env.VITE_API_URL;
+
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: red[700],
+//     },
+//     secondary: {
+//       main: orange[500],
+//     },
+//     background: {
+//       default: "#fbe9e7",
+//       frosted: "rgba(255, 255, 255, 0.5)",
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Arial, sans-serif",
+//     fontWeightBold: 600,
+//     allVariants: {
+//       color: "rgba(0, 0, 0, 0.87)",
+//       fontWeight: "bold",
+//     },
+//   },
+// });
+
+// function Bagels() {
+//   const [bagels, setBagels] = useState([]);
+//   const [page, setPage] = useState(1);
+//   const [rowsPerPage, setRowsPerPage] = useState(10);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     fetch(`${API}/bagels`)
+//       .then((res) => res.json())
+//       .then((res) => {
+//         console.log(res);
+//         setBagels(res);
+//       })
+//       .catch((err) => console.log(err));
+//   }, []);
+
+//   const handleRowClick = (id) => {
+//     navigate(`/bagels/${id}`);
+//   };
+
+//   const handleChangePage = (event, newPage) => {
+//     setPage(newPage);
+//   };
+
+//   const bagelsToDisplay = bagels.slice(
+//     (page - 1) * rowsPerPage,
+//     page * rowsPerPage
+//   );
+
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <div className="bagels-container" style={{ padding: "20px 50px" }}>
+//         <Grid container spacing={3}>
+//           {bagelsToDisplay.map((bagel) => (
+//             <Grid item xs={12} sm={6} md={4} lg={3} key={bagel.id}>
+//               <Card
+//                 sx={{
+//                   backgroundColor: theme.palette.background.frosted,
+//                   boxShadow: "none",
+//                   borderRadius: 2,
+//                   cursor: "pointer",
+//                   transition: "transform 0.2s",
+//                   "&:hover": {
+//                     transform: "scale(1.05)",
+//                   },
+//                 }}
+//                 onClick={() => handleRowClick(bagel.id)}
+//               >
+//                 <CardMedia
+//                   component="img"
+//                   height="140"
+//                   image={`/path/to/your/images/${bagel.image}`} // Adjust the path as necessary
+//                   alt={bagel.name}
+//                 />
+//                 <CardContent>
+//                   <Typography variant="h6" component="div" align="center">
+//                     {bagel.name}
+//                   </Typography>
+//                   <Typography
+//                     variant="body2"
+//                     color="text.secondary"
+//                     align="center"
+//                   >
+//                     {bagel.description}
+//                   </Typography>
+//                   <Typography
+//                     variant="body2"
+//                     color="text.secondary"
+//                     align="center"
+//                   >
+//                     Type: {bagel.type}
+//                   </Typography>
+//                   <Typography
+//                     variant="body2"
+//                     color="text.secondary"
+//                     align="center"
+//                   >
+//                     Price: ${bagel.price}
+//                   </Typography>
+//                   <Typography
+//                     variant="body2"
+//                     color="text.secondary"
+//                     align="center"
+//                   >
+//                     Gluten Free: {bagel.is_glutenFree ? "Yes" : "No"}
+//                   </Typography>
+//                 </CardContent>
+//               </Card>
+//             </Grid>
+//           ))}
+//         </Grid>
+//         <Pagination
+//           count={Math.ceil(bagels.length / rowsPerPage)}
+//           page={page}
+//           onChange={handleChangePage}
+//           color="primary"
+//           style={{
+//             marginTop: "20px",
+//             display: "flex",
+//             justifyContent: "center",
+//           }}
+//         />
+//       </div>
+//     </ThemeProvider>
+//   );
+// }
+
+// export default Bagels;

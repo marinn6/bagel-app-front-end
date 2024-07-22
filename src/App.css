@@ -1,5 +1,49 @@
+/* Global Styles */
+
+html,
 body {
-  cursor: url("./assets/6354202_bagel_donut_donuts_food_icon.png"), auto;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  cursor: url("./assets/6354202_bagel_donut_donuts_food_icon.png"), auto; /* Custom cursor */
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+.content {
+  flex: 1;
+  padding-bottom: 50px;
+  overflow-y: auto;
+}
+
+.footer {
+  background-color: transparent;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  color: #000;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #e1306c;
 }
 
 /* // #FFE5BD
