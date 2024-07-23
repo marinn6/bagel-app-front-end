@@ -213,7 +213,7 @@ import {
 } from "@mui/material";
 import "./BagelEditForm.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 function BagelEditForm() {
   const { id } = useParams();
