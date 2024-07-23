@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import bagelImage from "../assets/noun-bagel-2505765.png";
 import "./BagelNewForm.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 function BagelNewForm() {
   const navigate = useNavigate();
