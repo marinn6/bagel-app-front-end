@@ -427,7 +427,7 @@ import { red, orange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import "./Bagels.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 const theme = createTheme({
   palette: {

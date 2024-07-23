@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import "./BagelDetails.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 // Sample reviews data
 const sampleReviews = [
