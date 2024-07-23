@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import "./BagelDetails.css";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_BASE_URL;
 
 function BagelDetails() {
   const [bagel, setBagel] = useState({});
@@ -28,9 +28,9 @@ function BagelDetails() {
   useEffect(() => {
     fetch(`${API}/bagels/${id}`)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch bagel");
-        }
+        // if (!res.ok) {
+        //   throw new Error("Failed to fetch bagel");
+        // }
         return res.json();
       })
       .then((data) => {
@@ -38,6 +38,7 @@ function BagelDetails() {
         setLoading(false);
       })
       .catch((err) => {
+        console.log("WOrk")
         setError(err.message);
         setLoading(false);
       });
@@ -87,6 +88,7 @@ function BagelDetails() {
   }
 
   if (error) {
+    console.log(bagel)
     return (
       <Box
         display="flex"
@@ -98,6 +100,8 @@ function BagelDetails() {
       </Box>
     );
   }
+
+  console.log(bagel)
 
   return (
     <Box className="BagelDetailsContainer">
@@ -148,7 +152,7 @@ function BagelDetails() {
           variant="body1"
           sx={{ marginBottom: 2, color: "#f5f5f5", fontWeight: "bold" }}
         >
-          <strong>Price:</strong> ${bagel.price.toFixed(2)}
+          <strong>Price:</strong> ${bagel.price}
         </Typography>
         <Typography
           variant="body1"
