@@ -89,7 +89,7 @@ function BagelNewForm() {
           marginTop: 4,
           borderRadius: 2,
           boxShadow: 6,
-          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
           backdropFilter: "blur(1px)",
         }}
       >
@@ -120,7 +120,11 @@ function BagelNewForm() {
             required
             fullWidth
             variant="outlined"
-            sx={{ mb: 3 }}
+            sx={{
+              mb: 3,
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backdropFilter: "blur(1px)",
+            }}
           />
           <TextField
             id="description"
@@ -133,7 +137,11 @@ function BagelNewForm() {
             required
             fullWidth
             variant="outlined"
-            sx={{ mb: 3 }}
+            sx={{
+              mb: 3,
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backdropFilter: "blur(1px)",
+            }}
           />
           <FormControlLabel
             control={
@@ -159,9 +167,16 @@ function BagelNewForm() {
           >
             <Button
               type="submit"
-              variant="contained"
-              color="primary"
-              sx={{ flex: 1 }}
+              variant="outlined"
+              sx={{
+                flex: 1,
+                borderColor: "black",
+                color: "black",
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "transparent",
+                },
+              }}
             >
               Submit
             </Button>

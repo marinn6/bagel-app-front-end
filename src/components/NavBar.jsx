@@ -58,7 +58,7 @@ export default function NavBar() {
     <>
       <div className="hours-banner">
         The Bagel Lab is open Monday & Wednesday for in-person service, and
-        Tuesday, Thursday & Friday for delivery only. Hours: 10am to 4pm
+        Tuesday, Thursday & Friday for delivery only. Hours: 10am to 4pm.
       </div>
       <nav className="NavBar">
         <div className="logo">
