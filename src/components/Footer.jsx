@@ -1,5 +1,6 @@
 import React from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -20,6 +21,12 @@ function Footer() {
         >
           <FaTiktok size={30} />
         </a>
+      </div>
+      <div className="note">
+        <p>We hope you find your endless bagel.</p>
+      </div>
+      <div className="footer-links">
+        <Link to="/do-not-contact-us">Do Not Contact Us</Link>
       </div>
     </footer>
   );

@@ -7,16 +7,59 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import bagelImage from "../assets/AE742E85-F9ED-499E-9601-2814463F98D6_1_105_c.jpeg";
+import { createGlobalStyle } from "styled-components";
+import bagelImage from "../assets/Designer (15).png";
 import "./About.css";
+
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+  .neon {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem; 
+    font-weight: bold; 
+    color: #fff; 
+    position: relative;
+    display: inline-block;
+    text-shadow: 
+      0 0 5px #8B4513, /* SaddleBrown */
+      0 0 10px #8B4513, 
+      0 0 15px #A0522D, /* Sienna */
+      0 0 20px #A0522D, 
+      0 0 30px #D2691E, /* Chocolate */
+      0 0 40px #D2691E; 
+    animation: neon 1.5s infinite alternate;
+  }
+
+  @keyframes neon {
+    from {
+      text-shadow: 
+        0 0 5px #8B4513, 
+        0 0 10px #8B4513, 
+        0 0 15px #A0522D, 
+        0 0 20px #A0522D, 
+        0 0 30px #D2691E, 
+        0 0 40px #D2691E;
+    }
+    to {
+      text-shadow: 
+        0 0 10px #8B4513, 
+        0 0 20px #8B4513, 
+        0 0 30px #A0522D, 
+        0 0 40px #A0522D, 
+        0 0 50px #D2691E, 
+        0 0 60px #D2691E;
+    }
+  }
+`;
 
 const About = () => {
   return (
     <div className="about-container">
+      <GlobalStyle />
       <Container className="about-content">
         <Box sx={{ padding: 3, textAlign: "center", marginTop: "300px" }}>
-          {" "}
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h3" gutterBottom className="neon">
             hello, Delicious!~
           </Typography>
           <Paper elevation={3} className="paper">

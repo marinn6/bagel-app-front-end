@@ -18,7 +18,7 @@ import "./App.css";
 
 // COMPONENTS
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer"; // Import Footer component
+// import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
             <Route path="*" element={<FourOFour />} />
           </Routes>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </div>
   );
