@@ -195,7 +195,7 @@ function BagelDetails() {
             fontSize: "0.9rem",
           }}
         >
-          <strong>Price:</strong> ${bagel.price.toFixed(2)}
+          <strong>Price:</strong> ${Number(bagel.price)?.toFixed(2)}
         </Typography>
         <Typography
           variant="body1"
